@@ -5,10 +5,43 @@ by Sirius
 
 shlex | Designing + Programming
 iRay  | Programming
-
+Respublika | Remixed
 ]]
 
+local rainbowColors = {
+    Color3.fromRGB(255, 0, 0),    -- Red
+    Color3.fromRGB(255, 127, 0),  -- Orange
+    Color3.fromRGB(255, 255, 0),  -- Yellow
+    Color3.fromRGB(0, 255, 0),    -- Green
+    Color3.fromRGB(0, 0, 255),    -- Blue
+    Color3.fromRGB(75, 0, 130),   -- Indigo
+    Color3.fromRGB(143, 0, 255)   -- Violet
+}
 
+local function lerp(a, b, t)
+    return a:Lerp(b, t)
+end
+
+local function rainbowCycle()
+    local numberOfColors = #rainbowColors
+    local transitionTime = 1 -- Time in seconds for each color transition
+    local currentColorIndex = 1
+
+    while true do
+        local nextColorIndex = currentColorIndex % numberOfColors + 1
+        local currentColor = rainbowColors[currentColorIndex]
+        local nextColor = rainbowColors[nextColorIndex]
+
+        for t = 0, 1, 0.01 do
+            background.BackgroundColor3 = lerp(currentColor, nextColor, t)
+            wait(transitionTime / 100)
+        end
+
+        currentColorIndex = nextColorIndex
+    end
+end
+
+rainbowCycle()
 
 local Release = "Beta 8"
 local NotificationDuration = 6.5
